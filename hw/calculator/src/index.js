@@ -31,7 +31,7 @@ window.addEventListener("DOMContentLoaded", () => {
       calc.value2 = "m";
       show(calc.value2, display);
     } else if (validate(/^[a-z]+$/, e.target.value)) {
-      // при натиску кнопка mrc віводить те що збережено в his
+      // при натиску кнопка mrc виводить те що збережено в his
       show(calc.his, display);
       // при наступному натиску данні з his видаляються
       if (calc.his !== "") {
