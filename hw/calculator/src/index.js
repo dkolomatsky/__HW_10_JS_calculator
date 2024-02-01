@@ -1,6 +1,7 @@
 window.addEventListener("DOMContentLoaded", () => {
   const btn = document.querySelector(".keys");
-  const display = document.querySelector(".display > input");
+  const display = document.querySelector(".display > .inputDisplay");
+  const span = document.createElement("span");
 
   btn.addEventListener("click", function (e) {
     if (validate(/^\d$/, e.target.value)) {
@@ -14,9 +15,10 @@ window.addEventListener("DOMContentLoaded", () => {
         calc.value1 = "";
         // записуємо в памʼять введене значеня і вибраний оператор це дасть нам змогу ввести друге значення і не затерти перше і вибрану математичну операцію
         calc.his = calc.value2 + e.target.value;
+        calc.value2 = "";
       }
     } else if (validate(/^=$/, e.target.value)) {
-      if (calc.value1 !== "" && calc.value2 !== "" && calc.his !== "") {
+      if (calc.value1 !== "" && calc.his !== "") {
         // робимо вичеслення двух значень і збережемо його в rez
         calc.rez = eval(calc.his + calc.value1);
         show(calc.rez, display);
@@ -26,15 +28,25 @@ window.addEventListener("DOMContentLoaded", () => {
         calc.value2 = "";
         calc.rez = "";
         calc.value1 = "";
+
+        console.log(calc.his);
       }
     } else if (validate(/^m[\+\-]$/, e.target.value)) {
-      calc.value2 = "m";
-      show(calc.value2, display);
+      if (e.target.value === "m+") {
+        span.innerHTML = "m";
+        display.prepend(span);
+        calc.rez = span.innerText;
+      } else {
+        span.innerHTML = "";
+        calc.his = "";
+      }
+      show(calc.his, display);
     } else if (validate(/^[a-z]+$/, e.target.value)) {
       // при натиску кнопка mrc виводить те що збережено в his
       show(calc.his, display);
       // при наступному натиску данні з his видаляються
       if (calc.his !== "") {
+        span.innerHTML = "";
         calc.his = "";
       }
     } else if (validate(/^[C]$/, e.target.value)) {

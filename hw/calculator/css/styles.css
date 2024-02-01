@@ -32,6 +32,15 @@ body {
   font-size: 21px;
   text-align: right;
 }
+span{
+  display: block;
+  width: 10px;
+  height: 35px;
+  position: relative;
+  color: black;
+  background-color: #bccd95;
+  text-align: left;
+}
 
 .keys {
   position: relative;
